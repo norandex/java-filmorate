@@ -20,18 +20,18 @@ public class FilmStorageTest {
         this.fs = new FilmStorage();
     }
 
-     @Test
-     public void testInvalidFilmDateException() {
-         Film film = new Film(1, "Name", "Description",120 ,LocalDate.of(1892, Month.DECEMBER, 28));
+    @Test
+    public void testInvalidFilmDateException() {
+        Film film = new Film(1, "Name", "Description", 120, LocalDate.of(1892, Month.DECEMBER, 28));
 
-         Assertions.assertThrows(InvalidFilmReleaseDateException.class,() -> fs.createFilm(film));
-     }
+        Assertions.assertThrows(InvalidFilmReleaseDateException.class, () -> fs.createFilm(film));
+    }
 
     @Test
     public void testInvalidFilmUpdateException() {
-        Film film = new Film(1, "Name", "Description",120 ,LocalDate.of(2000, Month.DECEMBER, 28));
+        Film film = new Film(1, "Name", "Description", 120, LocalDate.of(2000, Month.DECEMBER, 28));
         fs.createFilm(film);
-        Film film_unknown_id = new Film(22, "Name", "Description",120 ,LocalDate.of(2000, Month.DECEMBER, 28));
-        Assertions.assertThrows(InvalidFilmUpdateException.class,() -> fs.updateFilm(film_unknown_id));
+        Film film_unknown_id = new Film(22, "Name", "Description", 120, LocalDate.of(2000, Month.DECEMBER, 28));
+        Assertions.assertThrows(InvalidFilmUpdateException.class, () -> fs.updateFilm(film_unknown_id));
     }
 }
