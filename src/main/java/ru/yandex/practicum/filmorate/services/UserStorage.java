@@ -1,6 +1,5 @@
 package ru.yandex.practicum.filmorate.services;
 
-import ru.yandex.practicum.filmorate.exception.InvalidFilmUpdateException;
 import ru.yandex.practicum.filmorate.exception.InvalidUserUpdateException;
 import ru.yandex.practicum.filmorate.model.User;
 

@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.*;
+import lombok.Data;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class User {
         this.name = login;
     }
 
-    public String getName(){
+    public String getName() {
         if (this.name.isBlank()) {
             return this.getLogin();
         }
