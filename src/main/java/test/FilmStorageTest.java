@@ -31,7 +31,7 @@ public class FilmStorageTest {
     public void testInvalidFilmUpdateException() {
         Film film = new Film(1, "Name", "Description", 120, LocalDate.of(2000, Month.DECEMBER, 28));
         fs.createFilm(film);
-        Film film_unknown_id = new Film(22, "Name", "Description", 120, LocalDate.of(2000, Month.DECEMBER, 28));
-        Assertions.assertThrows(InvalidFilmUpdateException.class, () -> fs.updateFilm(film_unknown_id));
+        Film filmUnknownId = new Film(22, "Name", "Description", 120, LocalDate.of(2000, Month.DECEMBER, 28));
+        Assertions.assertThrows(InvalidFilmUpdateException.class, () -> fs.updateFilm(filmUnknownId));
     }
 }

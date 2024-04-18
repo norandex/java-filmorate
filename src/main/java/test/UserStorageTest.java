@@ -23,7 +23,7 @@ public class UserStorageTest {
     public void testInvalidFilmUpdateException() {
         User user = new User(1, "Name", "login", LocalDate.of(2000, Month.DECEMBER, 28));
         us.createUser(user);
-        User user_unknown_id = new User(22, "Name", "login", LocalDate.of(2000, Month.DECEMBER, 28));
-        Assertions.assertThrows(InvalidUserUpdateException.class, () -> us.updateUser(user_unknown_id));
+        User userUnknownId = new User(22, "Name", "login", LocalDate.of(2000, Month.DECEMBER, 28));
+        Assertions.assertThrows(InvalidUserUpdateException.class, () -> us.updateUser(userUnknownId));
     }
 }
