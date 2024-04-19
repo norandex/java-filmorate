@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -31,4 +32,12 @@ public class User {
         this.birthday = birthday;
         this.name = login;
     }
+
+    public String getName() {
+        if (this.name == null || this.name.isBlank()) {
+            this.name = this.getLogin();
+        }
+        return this.name;
+    }
+
 }
