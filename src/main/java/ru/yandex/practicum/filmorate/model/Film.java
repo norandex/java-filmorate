@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ public class Film {
     private int id;
     @NotBlank
     private String name;
-    @Size(max = 200, min=1)
+    @Size(max = 200, min = 1)
     private String description;
     @Positive
     private long duration;
