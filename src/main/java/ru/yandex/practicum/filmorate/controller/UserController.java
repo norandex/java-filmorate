@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
@@ -9,8 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class UserController {
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserStorage users = new UserStorage();
 
     @GetMapping("/users")
@@ -21,14 +22,14 @@ public class UserController {
 
     @PostMapping(value = "/users")
     public User create(@Valid @RequestBody User user) {
-        log.info("User > Post Request");
+        log.info("User > Post Request {}", user);
         users.createUser(user);
         return user;
     }
 
     @PutMapping(value = "/users")
     public User put(@Valid @RequestBody User user) {
-        log.info("User > Put Request");
+        log.info("User > Put Request {}", user);
         users.updateUser(user);
         return user;
     }

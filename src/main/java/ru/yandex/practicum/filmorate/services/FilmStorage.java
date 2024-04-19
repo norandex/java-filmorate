@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class FilmStorage {
     private final Map<Integer, Film> films = new HashMap<>();
-
+    private final LocalDate sCinemaBirthday = LocalDate.of(1895, Month.DECEMBER, 28);
     private int id = 1;
 
     public Film createFilm(Film film) {
@@ -37,7 +37,7 @@ public class FilmStorage {
     }
 
     private void validate(Film film) {
-        if (film.getReleaseDate().isBefore(LocalDate.of(1895, Month.DECEMBER, 28))) {
+        if (film.getReleaseDate().isBefore(sCinemaBirthday)) {
             throw new InvalidFilmReleaseDateException();
         }
     }
