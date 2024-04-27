@@ -44,12 +44,4 @@ public class User {
         return this.name;
     }
 
-    public void addFriend(Long id) {
-        friends.add(id);
-    }
-
-    public void removeFriend(Long id) {
-        friends.remove(id);
-    }
-
 }

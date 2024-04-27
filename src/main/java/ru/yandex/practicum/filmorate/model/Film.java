@@ -29,12 +29,5 @@ public class Film {
     private LocalDate releaseDate;
     private Set<Long> likes = new HashSet<>();
 
-    public void addLike(Long id) {
-        likes.add(id);
-    }
-
-    public void removeLike(Long id) {
-        likes.remove(id);
-    }
 
 }
