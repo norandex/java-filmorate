@@ -1,5 +1,6 @@
-package ru.yandex.practicum.filmorate.services;
+package ru.yandex.practicum.filmorate.storage;
 
+import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.InvalidUserUpdateException;
 import ru.yandex.practicum.filmorate.model.User;
 
@@ -8,24 +9,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserStorage {
-    private final Map<Integer, User> users = new HashMap<>();
+@Component
+public class InMemoryUserStorage implements UserStorage {
+    private final Map<Long, User> users = new HashMap<>();
 
-    private int id = 1;
+    private long id = 1;
 
+    @Override
     public User createUser(User user) {
         user.setId(id++);
-        return users.put(user.getId(), user);
+        users.put(user.getId(), user);
+        return user;
     }
 
+    @Override
     public List<User> readAllUsers() {
         return new ArrayList<>(users.values());
     }
 
+    @Override
+    public User getUserById(Long id) {
+        return users.get(id);
+    }
+
+    @Override
     public User updateUser(User user) {
         if (!users.containsKey(user.getId())) {
             throw new InvalidUserUpdateException();
         }
         return users.put(user.getId(), user);
+    }
+
+    @Override
+    public User deleteUser(User user) {
+        return users.remove(user.getId());
     }
 }
