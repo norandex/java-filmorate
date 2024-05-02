@@ -44,4 +44,4 @@ class UserDbStorageTest {
         Assertions.assertThat(updatedUser).isNotNull().usingRecursiveComparison().isEqualTo(newUpdatedUser);
 
     }
-} 
+}
