@@ -25,12 +25,12 @@ class FilmDbStorageTest {
     @Test
     public void testFindUserById() {
         FilmStorage filmStorage = new FilmDaoImpl(jdbcTemplate);
-        Film newFilm = Film.builder().id(1L).name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
+        Film newFilm = Film.builder().name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
 
         filmStorage.createFilm(newFilm);
 
 
-        Film savedFilm = filmStorage.readFilmById(1L);
+        Film savedFilm = filmStorage.readFilmById(newFilm.getId());
 
 
         Assertions.assertThat(savedFilm).isNotNull().usingRecursiveComparison().isEqualTo(newFilm);
