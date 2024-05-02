@@ -40,7 +40,7 @@ public class MpaRatingDaoImpl implements MpaRatingDao {
     @Override
     public List<MpaRating> readAllMpaRatings() {
         String sqlQuery = "select mp.id, mp.name, from mpa_rating mp ORDER BY mp.id";
-        return jdbcTemplate.query(sqlQuery, this::MpaRatingRowMapper);
+        return jdbcTemplate.query(sqlQuery, this::mpaRatingRowMapper);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MpaRatingDaoImpl implements MpaRatingDao {
         String sqlQuery = "select id, name " +
                 "from mpa_rating where id = ?";
         try {
-            return jdbcTemplate.queryForObject(sqlQuery, this::MpaRatingRowMapper, id);
+            return jdbcTemplate.queryForObject(sqlQuery, this::mpaRatingRowMapper, id);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -72,7 +72,7 @@ public class MpaRatingDaoImpl implements MpaRatingDao {
         return jdbcTemplate.update(sqlQuery, id) > 0;
     }
 
-    private MpaRating MpaRatingRowMapper(ResultSet rs, int rowNum) throws SQLException {
+    private MpaRating mpaRatingRowMapper(ResultSet rs, int rowNum) throws SQLException {
         return MpaRating.builder()
                 .id(rs.getLong("id"))
                 .name(rs.getString("name"))

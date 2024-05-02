@@ -48,10 +48,10 @@ public class LikeDaoImpl implements LikeDao {
                 "GROUP BY id\n" +
                 "ORDER BY likes_total DESC\n" +
                 "LIMIT ?;";
-        return jdbcTemplate.query(sqlQuery, this::FilmsRowMapper, count);
+        return jdbcTemplate.query(sqlQuery, this::filmsRowMapper, count);
     }
 
-    private List<Film> FilmsRowMapper(ResultSet rs) throws SQLException {
+    private List<Film> filmsRowMapper(ResultSet rs) throws SQLException {
         List<Film> films = new ArrayList<>();
         while (rs.next()) {
             films.add(filmDao.readFilmById(rs.getLong("id")));
