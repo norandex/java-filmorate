@@ -91,13 +91,13 @@ public class FilmDaoImpl implements FilmStorage {
                 "    f.DATE_RELEASE = ?, \n" +
                 "    f.MPA_ID =  ?\n" +
                 "WHERE f.id = ?";
-        jdbcTemplate.update(sqlQuery
-                , film.getName()
-                , film.getDescription()
-                , film.getDuration()
-                , film.getReleaseDate()
-                , film.getMpa().getId()
-                , film.getId());
+        jdbcTemplate.update(sqlQuery,
+                film.getName(),
+                film.getDescription(),
+                film.getDuration(),
+                film.getReleaseDate(),
+                film.getMpa().getId(),
+                film.getId());
         jdbcTemplate.update("DELETE film_genres where film_genres.film_id = ?", film.getId());
         addFilmGenres(film);
         return film;
