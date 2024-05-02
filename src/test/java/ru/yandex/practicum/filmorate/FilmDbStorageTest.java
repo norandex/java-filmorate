@@ -25,15 +25,7 @@ class FilmDbStorageTest {
     @Test
     public void testFindUserById() {
         FilmStorage filmStorage = new FilmDaoImpl(jdbcTemplate);
-        Film newFilm = Film.builder()
-                .id(1L)
-                .name("test_film")
-                .description("great film")
-                .duration(120)
-                .releaseDate(LocalDate.of(1990, 1, 1))
-                .mpa(mpa)
-                .genres(new HashSet<>())
-                .build();
+        Film newFilm = Film.builder().id(1L).name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
 
         filmStorage.createFilm(newFilm);
 
@@ -41,45 +33,23 @@ class FilmDbStorageTest {
         Film savedFilm = filmStorage.readFilmById(1L);
 
 
-        Assertions.assertThat(savedFilm)
-                .isNotNull()
-                .usingRecursiveComparison()
-                .isEqualTo(newFilm);
+        Assertions.assertThat(savedFilm).isNotNull().usingRecursiveComparison().isEqualTo(newFilm);
     }
 
     @Test
     public void testUpdateFilm() {
         FilmStorage filmStorage = new FilmDaoImpl(jdbcTemplate);
-        Film newFilm = Film.builder()
-                .id(1L)
-                .name("test_film")
-                .description("great film")
-                .duration(120)
-                .releaseDate(LocalDate.of(1990, 1, 1))
-                .mpa(mpa)
-                .genres(new HashSet<>())
-                .build();
+        Film newFilm = Film.builder().id(1L).name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
 
         filmStorage.createFilm(newFilm);
 
         Film savedFilm = filmStorage.readFilmById(1L);
 
-        Film newFilmUpdated = Film.builder()
-                .id(1L)
-                .name("test_film 2")
-                .description("great film, pt.2")
-                .duration(144)
-                .releaseDate(LocalDate.of(1995, 1, 1))
-                .mpa(mpa)
-                .genres(new HashSet<>())
-                .build();
+        Film newFilmUpdated = Film.builder().id(1L).name("test_film 2").description("great film, pt.2").duration(144).releaseDate(LocalDate.of(1995, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
 
         Film updatedFilm = filmStorage.updateFilm(newFilmUpdated);
 
-        Assertions.assertThat(updatedFilm)
-                .isNotNull()
-                .usingRecursiveComparison()
-                .isEqualTo(newFilmUpdated);
+        Assertions.assertThat(updatedFilm).isNotNull().usingRecursiveComparison().isEqualTo(newFilmUpdated);
 
     }
 

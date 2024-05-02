@@ -17,18 +17,12 @@ class GenreDbStorageTest {
 
     @Test
     public void testGenreById() {
-        Genre newGenre = Genre.builder()
-                .id(7L)
-                .name("Немое кино")
-                .build();
+        Genre newGenre = Genre.builder().id(7L).name("Немое кино").build();
         GenreDao genreDao = new GenreDaoImpl(jdbcTemplate);
         genreDao.createGenre(newGenre);
 
         Genre savedGenre = genreDao.readGenreById(7L);
 
-        Assertions.assertThat(savedGenre)
-                .isNotNull()
-                .usingRecursiveComparison()
-                .isEqualTo(newGenre);
+        Assertions.assertThat(savedGenre).isNotNull().usingRecursiveComparison().isEqualTo(newGenre);
     }
 }
