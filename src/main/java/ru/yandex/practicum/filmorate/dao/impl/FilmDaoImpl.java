@@ -120,9 +120,9 @@ public class FilmDaoImpl implements FilmStorage {
                 .build();
         film.setMpa(new MpaRating(rs.getLong("mpa_id"), rs.getString("mpa")));
         do {
-            String genre_name = rs.getString("genre_name");
-            if (genre_name != null) {
-                Genre genre = new Genre(rs.getLong("genre_id"), genre_name);
+            String genreName = rs.getString("genre_name");
+            if (genreName != null) {
+                Genre genre = new Genre(rs.getLong("genre_id"), genreName);
                 film.getGenres().add(genre);
             }
         } while (rs.next());
