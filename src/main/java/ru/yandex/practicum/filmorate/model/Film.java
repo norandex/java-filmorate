@@ -1,14 +1,13 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -18,6 +17,9 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Film {
     private long id;
     @NotBlank
@@ -27,7 +29,16 @@ public class Film {
     @Positive
     private long duration;
     private LocalDate releaseDate;
+    private MpaRating mpa;
+    private Set<Genre> genres = new LinkedHashSet<>();
     private Set<Long> likes = new HashSet<>();
 
-
+    public Film(long id, String name, String description, long duration, LocalDate releaseDate, MpaRating mpa) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.mpa = mpa;
+    }
 }

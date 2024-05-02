@@ -9,7 +9,7 @@ public interface FilmService {
 
     Film getFilmById(Long id);
 
-    Film deleteFilmById(Long id);
+    boolean deleteFilmById(Long id);
 
     List<Film> readAllFilms();
 
@@ -17,7 +17,7 @@ public interface FilmService {
 
     Film likeFilm(Long filmId, Long userId);
 
-    Film deleteLike(Long filmId, Long userId);
+    boolean deleteLike(Long filmId, Long userId);
 
     List<Film> getPopularFilms(Integer count);
 }
