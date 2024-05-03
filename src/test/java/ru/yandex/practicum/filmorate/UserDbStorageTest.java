@@ -11,6 +11,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @JdbcTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -44,4 +45,35 @@ class UserDbStorageTest {
         Assertions.assertThat(updatedUser).isNotNull().usingRecursiveComparison().isEqualTo(newUpdatedUser);
 
     }
+
+    @Test
+    public void testDeleteUser() {
+        User newUser = User.builder().id(1L).email("user@email.ru").login("vanya123").name("Ivan Petrov").birthday(LocalDate.of(1990, 1, 1)).friends(null).build();
+
+        UserStorage userStorage = new UserDaoImpl(jdbcTemplate);
+        userStorage.createUser(newUser);
+        userStorage.deleteUser(newUser.getId());
+
+        List<User> userList = userStorage.readAllUsers();
+
+        Assertions.assertThat(userList).isEmpty();
+    }
+
+    @Test
+    public void testGetAllUser() {
+        UserStorage userStorage = new UserDaoImpl(jdbcTemplate);
+
+        User newUser = User.builder().email("user@email.ru").login("vanya123").name("Ivan Petrov").birthday(LocalDate.of(1990, 1, 1)).friends(null).build();
+        User anotherUser = User.builder().email("user@yahoo.ru").login("ilya123").name("Ilya Petrov").birthday(LocalDate.of(1992, 1, 1)).friends(null).build();
+
+        userStorage.createUser(newUser);
+        userStorage.createUser(anotherUser);
+
+        List<User> listUser = List.of(newUser, anotherUser);
+
+        List<User> readUserList = userStorage.readAllUsers();
+
+        Assertions.assertThat(listUser).hasSameElementsAs(readUserList);
+    }
+
 }

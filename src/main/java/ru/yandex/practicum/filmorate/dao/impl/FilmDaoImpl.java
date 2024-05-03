@@ -111,7 +111,7 @@ public class FilmDaoImpl implements FilmStorage {
 
     private Film filmRowMapper(ResultSet rs, int rowNum) throws SQLException {
         Film film = Film.builder()
-                .id(rs.getInt("id"))
+                .id(rs.getInt("film_id"))
                 .name(rs.getString("name"))
                 .description(rs.getString("description"))
                 .duration(rs.getLong("duration"))
@@ -132,10 +132,10 @@ public class FilmDaoImpl implements FilmStorage {
     private List<Film> allFilmsRowMapper(ResultSet rs) throws SQLException {
         Map<Long, Film> films = new HashMap<>();
         while (rs.next()) {
-            Long filmId = rs.getLong("id");
+            Long filmId = rs.getLong("film_id");
             if (!films.containsKey(filmId)) {
                 Film film = Film.builder()
-                        .id(rs.getLong("id"))
+                        .id(rs.getLong("film_id"))
                         .name(rs.getString("name"))
                         .description(rs.getString("description"))
                         .duration(rs.getLong("duration"))
@@ -145,7 +145,6 @@ public class FilmDaoImpl implements FilmStorage {
                 film.setMpa(new MpaRating(rs.getLong("mpa_id"), rs.getString("mpa")));
                 films.put(filmId, film);
             }
-
             Film film = films.get(filmId);
             Genre genre = new Genre(rs.getLong("genre_id"), rs.getString("genre_name"));
             film.getGenres().add(genre);
