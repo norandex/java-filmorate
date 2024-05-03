@@ -23,7 +23,7 @@ class GenreDbStorageTest {
         GenreDao genreDao = new GenreDaoImpl(jdbcTemplate);
         genreDao.createGenre(newGenre);
 
-        Genre savedGenre = genreDao.readGenreById(7L);
+        Genre savedGenre = genreDao.readGenreById(newGenre.getId());
 
         Assertions.assertThat(savedGenre).isNotNull().usingRecursiveComparison().isEqualTo(newGenre);
     }
