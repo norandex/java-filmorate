@@ -31,14 +31,14 @@ class UserDbStorageTest {
 
     @Test
     public void testUpdateUser() {
-        User newUser = User.builder().id(1L).email("user@email.ru").login("vanya123").name("Ivan Petrov").birthday(LocalDate.of(1990, 1, 1)).friends(null).build();
+        User newUser = User.builder().email("user@email.ru").login("vanya123").name("Ivan Petrov").birthday(LocalDate.of(1990, 1, 1)).friends(null).build();
 
         UserStorage userStorage = new UserDaoImpl(jdbcTemplate);
         userStorage.createUser(newUser);
 
-        User savedUser = userStorage.getUserById(1L);
+        User savedUser = userStorage.getUserById(newUser.getId());
 
-        User newUpdatedUser = User.builder().id(1L).email("user@yahoo.com").login("nevanya123").name("Neivan Petrov").birthday(LocalDate.of(1997, 1, 1)).friends(null).build();
+        User newUpdatedUser = User.builder().id(newUser.getId()).email("user@yahoo.com").login("nevanya123").name("Neivan Petrov").birthday(LocalDate.of(1997, 1, 1)).friends(null).build();
 
         User updatedUser = userStorage.updateUser(newUpdatedUser);
 
