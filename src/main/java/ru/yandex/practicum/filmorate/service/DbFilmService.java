@@ -77,7 +77,7 @@ public class DbFilmService implements FilmService {
 
     private void validate(Film film) {
         if (film.getReleaseDate().isBefore(sCinemaBirthday)) {
-            throw new ValidationException();
+            throw new ValidationException("Неверная дата фильма");
         }
     }
 }

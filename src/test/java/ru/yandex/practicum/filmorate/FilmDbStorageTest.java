@@ -21,12 +21,12 @@ import java.util.List;
 class FilmDbStorageTest {
 
     private final JdbcTemplate jdbcTemplate;
-    MpaRating mpa = new MpaRating(1L, "G");
+    private final MpaRating mpa = new MpaRating(1L, "G");
 
     @Test
     public void testFindFilmById() {
         FilmStorage filmStorage = new FilmDaoImpl(jdbcTemplate);
-        Film newFilm = Film.builder().name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
+        Film newFilm = Film.builder().name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>(List.of(new Genre(5L, "Документальный")))).build();
 
         filmStorage.createFilm(newFilm);
 
@@ -40,13 +40,13 @@ class FilmDbStorageTest {
     @Test
     public void testUpdateFilm() {
         FilmStorage filmStorage = new FilmDaoImpl(jdbcTemplate);
-        Film newFilm = Film.builder().id(1L).name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
+        Film newFilm = Film.builder().id(1L).name("test_film").description("great film").duration(120).releaseDate(LocalDate.of(1990, 1, 1)).mpa(mpa).genres(new HashSet<>(List.of(new Genre(5L, "Документальный")))).build();
 
         filmStorage.createFilm(newFilm);
 
         Film savedFilm = filmStorage.readFilmById(1L);
 
-        Film newFilmUpdated = Film.builder().id(1L).name("test_film 2").description("great film, pt.2").duration(144).releaseDate(LocalDate.of(1995, 1, 1)).mpa(mpa).genres(new HashSet<>()).build();
+        Film newFilmUpdated = Film.builder().id(1L).name("test_film 2").description("great film, pt.2").duration(144).releaseDate(LocalDate.of(1995, 1, 1)).mpa(mpa).genres(new HashSet<>(List.of(new Genre(6L, "Боевик")))).build();
 
         Film updatedFilm = filmStorage.updateFilm(newFilmUpdated);
 

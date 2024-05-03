@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @Primary
@@ -153,10 +154,14 @@ public class FilmDaoImpl implements FilmStorage {
     }
 
     private void addFilmGenres(Film film) {
-        String sqlGenreQuery = "INSERT INTO film_genres (film_id, genre_id)\n" +
-                "VALUES (?, ?)";
-        for (Genre g : film.getGenres()) {
-            jdbcTemplate.update(sqlGenreQuery, film.getId(), g.getId());
+        if (!film.getGenres().isEmpty()) {
+            String sqlGenreQuery = "INSERT INTO film_genres (film_id, genre_id)\n" +
+                    "VALUES " + film.getGenres()
+                    .stream()
+                    .map(Genre::getId)
+                    .map(o -> String.format("(%d,%d)", film.getId(), o))
+                    .collect(Collectors.joining(", "));
+            jdbcTemplate.update(sqlGenreQuery);
         }
     }
 
