@@ -46,7 +46,7 @@ public class BaseFilmService implements FilmService {
     }
 
     @Override
-    public Film deleteFilmById(Long id) {
+    public boolean deleteFilmById(Long id) {
         getFilmById(id);
         return filmStorage.deleteFilm(id);
     }
@@ -74,7 +74,7 @@ public class BaseFilmService implements FilmService {
     }
 
     @Override
-    public Film deleteLike(Long filmId, Long userId) {
+    public boolean deleteLike(Long filmId, Long userId) {
         Film film = getFilmById(filmId);
         User user = userStorage.getUserById(userId);
         if (user == null) {
@@ -100,9 +100,8 @@ public class BaseFilmService implements FilmService {
         }
     }
 
-    private Film removeLikeFromFilm(Film film, Long userId) {
-        film.getLikes().remove(userId);
-        return film;
+    private boolean removeLikeFromFilm(Film film, Long userId) {
+        return film.getLikes().remove(userId);
     }
 
 
